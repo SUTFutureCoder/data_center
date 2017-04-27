@@ -20,6 +20,14 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+//		=$this->load->view('welcome_message');
+        //用于写
+        $this->load->model('probe_model');
+
+        $json = json_decode(file_get_contents('php://input'), true);
+        if (!is_array($json)) {
+            exit;
+        }
+        $this->probe_model->setProbe($json);
 	}
 }
